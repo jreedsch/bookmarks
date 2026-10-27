@@ -11,7 +11,12 @@ template, not requirements for this project.
 ## Conventions
 - Vanilla ES modules only; no npm dependencies unless agreed first.
 - Entry point is `index.html`, which loads `js/main.js` and `css/styles.css`.
-- Components live in `js/components/`, one per file, each a function returning a DOM element.
+- Components live in `js/components/`, one per file, each a `createX()` function returning
+  a DOM element, or `{ element, ...methods }` when the app needs to update it.
+- `js/main.js` owns app state (selected document) and wires components together.
+- The API URL lives only in `js/config.js`; all API calls go through `js/api.js`.
+- Build DOM with `textContent`, never `innerHTML` with API data; only put http(s) URLs
+  into links and iframes (`isWebUrl` in `js/urls.js`).
 - Use the spec's screen element names (QUERY INPUT, RESPONSE LIST, DOCUMENT DETAIL,
   SHOW SOURCE, PAGEVIEW) in code and ids, e.g. `query-input`, `response-list`.
 

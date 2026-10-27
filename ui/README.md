@@ -21,6 +21,16 @@ CLAUDE.md             conventions and context for Claude Code
 docs/SPEC.md          project specification
 index.html            entry page
 css/styles.css        global styles
-js/main.js            entry script, mounts components into #app
-js/components/        UI components (functions that return DOM elements)
+js/main.js            entry script, app state, wires components together
+js/config.js          search API URL
+js/api.js             search API call (fetch)
+js/urls.js            URL helpers (http(s) check, YouTube embed URL)
+js/components/        the four windows: queryInput, responseList, documentDetail, pageView
 ```
+
+## API
+
+The UI POSTs `{ "query": "..." }` to the URL in `js/config.js` and expects a JSON array
+of documents (see `docs/SPEC.md`, API CONTRACT). Because the page and API run on
+different ports, the API must send CORS headers, e.g. `Access-Control-Allow-Origin: *`,
+and answer `OPTIONS` preflight requests.
