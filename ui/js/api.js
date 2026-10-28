@@ -2,12 +2,13 @@ import { API_URL } from './config.js';
 
 // POSTs the query and returns the array of documents (see docs/SPEC.md, API CONTRACT).
 export async function searchDocuments(query) {
+  console.log("IN searchDocuments, query: "+query+", API: "+API_URL)
   let response;
   try {
     response = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ "query": query }),
     });
   } catch {
     // Network failure, server down, or blocked by CORS.
@@ -19,8 +20,16 @@ export async function searchDocuments(query) {
   }
 
   const documents = await response.json();
-  if (!Array.isArray(documents)) {
+  console.log("IN searchDocuments, documents from server: ")
+  console.log(documents)
+  console.log(typeof(documents))
+  //const data = JSON.parse(documents);
+  var doclist = documents.result
+  console.log(doclist)
+  if (!Array.isArray(doclist)) {
     throw new Error('Search failed: expected a JSON array of documents');
   }
-  return documents;
+  console.log("IN searchDocuments, return:")
+  console.log(doclist)
+  return doclist;
 }

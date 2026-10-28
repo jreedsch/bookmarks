@@ -33,6 +33,8 @@ export function createDocumentDetail({ onShowSourceChange }) {
   }
 
   function render(doc) {
+    console.log("IN documentDetail.render, doc:")
+    console.log(doc)
     if (!doc) {
       const placeholder = document.createElement('p');
       placeholder.className = 'status';

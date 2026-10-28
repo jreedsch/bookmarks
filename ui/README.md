@@ -8,6 +8,7 @@ Requirements are in [docs/SPEC.md](docs/SPEC.md).
 
 ES modules don't load from `file://`, so serve the folder locally:
 
+run from same directory as index.html
 ```bash
 python3 -m http.server 8000
 ```

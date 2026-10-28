@@ -43,11 +43,19 @@ export function createResponseList({ onSelect }) {
     },
 
     showResults(results) {
-      documents = results;
+      console.log("IN responseList.showResults, results:")
+      console.log(results)
+
+      documents = results; //???
+
       list.replaceChildren(
         ...results.map((doc) => {
           const option = document.createElement('option');
-          option.textContent = doc.title || '(untitled)';
+          const contents = doc.score + "% " + doc.title
+          console.log("contents: "+contents)
+          //option.textContent = doc.score + " " + doc.title || '(untitled)';
+          option.textContent = contents
+
           return option;
         }),
       );
